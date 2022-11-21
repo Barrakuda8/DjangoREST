@@ -1,8 +1,9 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const MenuLink = ({link}) => {
     return (
-        <a class='menu_link' href={link[1]}>{link[0]}</a>
+        <Link to={link[1]} class='menu_link'>{link[0]}</Link>
     )
 }
 
