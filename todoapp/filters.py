@@ -4,7 +4,6 @@ from .models import Todo, Project
 
 class TodoFilter(rest_framework.FilterSet):
 
-    # два варианта реализации, оба должны быть рабочие
     created_after = rest_framework.DateTimeFilter(field_name='created_at', lookup_expr='gt', label='Created after')
     created_before = rest_framework.DateTimeFilter(field_name='created_at', lookup_expr='lt', label='Created before')
 

@@ -12,7 +12,7 @@ class Command(BaseCommand):
         Project.objects.all().delete()
 
         user_1 = User.objects.create_superuser(username='superuser', firstname='Harry', lastname='Potter',
-                                               email='h.potter@hogwarts.uk')
+                                               email='h.potter@hogwarts.uk', password='12345')
         user_2 = User.objects.create(username='bloody_user', firstname='Ron', lastname='Weasley',
                                      email='r.weasley@hogwarts.uk')
         user_3 = User.objects.create(username='expelled_user', firstname='Hermione', lastname='Granger',
@@ -46,5 +46,3 @@ class Command(BaseCommand):
         Todo.objects.create(project=project_3, text='Date another girl', user=user_2, status=False)
         Todo.objects.create(project=project_3, text='That girl die', user=user_3, status=False)
         Todo.objects.create(project=project_3, text='Date each other', user=user_3, status=False)
-
-
