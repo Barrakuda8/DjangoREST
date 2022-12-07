@@ -50,7 +50,7 @@ class TestProjectModelViewSet(TestCase):
     #     client.logout()
 
 
-class TestTodoModelViewSer(TestCase):
+class TestTodoModelViewSer(APITestCase):
 
     def test_guest_edit_todo(self):
         todo = mixer.blend(Todo)
