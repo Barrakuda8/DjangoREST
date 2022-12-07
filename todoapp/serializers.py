@@ -18,3 +18,10 @@ class TodoModelSerializer(ModelSerializer):
     class Meta:
         model = Todo
         fields = '__all__'
+
+
+class TodoModelSerializerBase(ModelSerializer):
+
+    class Meta:
+        model = Todo
+        fields = '__all__'
