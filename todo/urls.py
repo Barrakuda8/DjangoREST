@@ -4,6 +4,7 @@ from rest_framework.routers import DefaultRouter
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework.permissions import AllowAny
+from graphene_django.views import GraphQLView
 from userapp.views import UserModelViewSet
 from todoapp.views import ProjectModelViewSet, TodoModelViewSet
 from rest_framework.authtoken import views
@@ -34,4 +35,5 @@ urlpatterns = [
     path('api/<str:version>/users/', UserModelViewSet.as_view({'get': 'list'})),
     path('swagger<str:format>/', schema_view.without_ui()),
     path('swagger/', schema_view.with_ui('swagger')),
+    path("graphql/", GraphQLView.as_view(graphiql=True)),
 ]
