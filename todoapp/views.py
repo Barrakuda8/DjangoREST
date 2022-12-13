@@ -4,6 +4,8 @@ from rest_framework.pagination import LimitOffsetPagination
 from .serializers import ProjectModelSerializer, TodoModelSerializer, TodoModelSerializerBase
 from .models import Project, Todo
 from .filters import ProjectFilter, TodoFilter
+from rest_framework.response import Response
+from rest_framework import status
 
 
 class ProjectLimitOffsetPagination(LimitOffsetPagination):
@@ -31,7 +33,10 @@ class TodoModelViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def destroy(self, request, *args, **kwargs):
-        Todo.objects.get(self.kwargs['name']).status = False
+        todo = Todo.objects.get(id=self.kwargs['pk'])
+        todo.status = False
+        todo.save()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def get_serializer_class(self):
         if self.request.method in ['GET']:
