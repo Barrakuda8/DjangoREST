@@ -10,10 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from os import getenv
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+dot_env = BASE_DIR / '.env'
+load_dotenv(dotenv_path=dot_env)
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-u18%a1$%f^by93o0tf(zj7l%hf)yh^v12!7(3t#e09!ms3)nvd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -62,6 +67,29 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
 ]
 
+ENV_TYPE = getenv('ENV_TYPE')
+
+if ENV_TYPE == 'local':
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3'
+        }
+    }
+
+else:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'todo',
+            'USER': 'superuser',
+            'PASSWORD': '12345',
+            'HOST': 'db',
+            'PORT': '5432'
+        }
+    }
 
 ROOT_URLCONF = 'todo.urls'
 
@@ -82,17 +110,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'todo.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
