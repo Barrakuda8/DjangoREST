@@ -30,20 +30,21 @@ class App extends React.Component {
 
     load_data() {
         const headers = this.get_headers();
+        const host = '185.46.8.161'
 
-        axios.get('http://89.108.99.211:8000/api/users/', {headers})
+        axios.get('http://' + host + ':8000/api/users/', {headers})
         .then(response => {
             const users = response.data.results;
             this.setState({'users': users});
         }).catch(error => console.log(error));
 
-        axios.get('http://89.108.99.211:8000/api/projects/', {headers})
+        axios.get('http://' + host + ':8000/api/projects/', {headers})
         .then(response => {
             const projects = response.data.results;
             this.setState({'projects': projects});
         }).catch(error => console.log(error));
 
-        axios.get('http://89.108.99.211:8000/api/todos/', {headers})
+        axios.get('http://' + host + ':8000/api/todos/', {headers})
         .then(response => {
             const todos = response.data.results;
             this.setState({'todos': todos});
